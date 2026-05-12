@@ -319,4 +319,4 @@ Longo prazo (6-12 meses):
 Projeto desenvolvido como parte do desafio de modernização analítica da **LH Nautical**.
 
 > *"Dados organizados são o alicerce de qualquer decisão inteligente."*
-> — Gabriel Santos, Tech Lead
+> — Jair Pereira da Silva Júnior, Data Analyst | Indicium
