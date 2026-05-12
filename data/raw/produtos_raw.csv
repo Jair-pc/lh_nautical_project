@@ -1,0 +1,26 @@
+id_produto,nome_produto,categoria,subcategoria,preco_custo,preco_venda,estoque_atual,fornecedor,sku,peso_kg,unidade
+P001,Motor de Popa 15HP 4T Yamaha,Motores,Motores 4T,8500.00,12500.00,5,Yamaha do Brasil,YAM-15HP-4T,45.0,unidade
+P002,Motor de Popa 6HP 2T Mercury,Motores,Motores 2T,2800.00,4200.00,8,Mercury Marine,MER-6HP-2T,18.5,unidade
+P003,Motor Elétrico de Popa 55lb Minn Kota,Motores,Motores Elétricos,1200.00,1890.00,12,Minn Kota,MINN-55LB,7.2,unidade
+P004,Hélice Alumínio 3 Pás 13x19,Motores,Hélices,280.00,450.00,35,Solas Brasil,SOL-AL-319,1.2,unidade
+P005,Colete Salva-Vidas Adulto ISO 12402-5,Segurança,Coletes,85.00,145.00,120,Plastimar,PLT-CVA-ISO,0.4,unidade
+P006,Colete Infantil até 30kg,Segurança,Coletes,70.00,120.00,85,Plastimar,PLT-CVI-30,0.35,unidade
+P007,Sinalizador Fumigênio 15min,Segurança,Sinalização,45.00,78.00,200,Pains Wessex,PWX-FUM-15,0.08,unidade
+P008,Extintor de Incêndio Náutico 1kg,Segurança,Extintores,55.00,95.00,65,Amerex,AMX-EXT-1K,1.8,unidade
+P009,Kit Emergência Marítima Completo,Segurança,Kits,180.00,320.00,28,Multimix,MUL-KIT-EMG,2.1,kit
+P010,GPS Náutico Garmin ECHOMAP 62cv,Navegação,GPS,1800.00,2850.00,18,Garmin,GAR-ECH-62,0.7,unidade
+P011,Bússola Náutica Silva 70UN,Navegação,Bússolas,320.00,520.00,22,Silva,SIL-70UN,0.3,unidade
+P012,Sonar Ecobatímetro Lowrance Hook2 4x,Navegação,Sonares,680.00,1080.00,15,Lowrance,LOW-H2-4X,0.5,unidade
+P013,Carta Náutica Costa Sul Brasil,Navegação,Cartas,45.00,85.00,60,FEMAR,FEM-CARTA-S,0.2,unidade
+P014,Âncora Patente 8kg Aço Inox,Deck e Acessórios,Âncoras,380.00,620.00,25,Inoxline,INX-ANC-8KG,8.0,unidade
+P015,Corda Náutica Trançada 12mm 15m,Deck e Acessórios,Cordas,65.00,120.00,150,Mariner,MAR-COR-12M,1.1,unidade
+P016,Bóia Salva-Vidas 24 Polegadas,Deck e Acessórios,Bóias,95.00,165.00,80,Plastimar,PLT-BOIA-24,1.8,unidade
+P017,Cabo de Reboque Náutico 10m,Deck e Acessórios,Cabos,45.00,85.00,95,Mariner,MAR-CAB-REB,0.9,unidade
+P018,Fender Inflável 16x46cm Branco,Deck e Acessórios,Fenders,55.00,95.00,110,Tessilmare,TES-FEN-16,0.6,unidade
+P019,Tinta Antincrustante Coral 0.9L,Manutenção,Tintas,120.00,210.00,40,Coral,COR-ANT-09,1.1,litro
+P020,Cera Nauticare Protetora 473ml,Manutenção,Ceras,42.00,78.00,75,Nauticare,NTC-CERA-473,0.6,unidade
+P021,Kit Reparo de Gel Coat Branco,Manutenção,Kits,85.00,155.00,30,West System,WST-KIT-GEL,0.5,kit
+P022,Óleo Motor Náutico 4T 1L,Manutenção,Óleos,28.00,52.00,200,Yamaha,YAM-OL-4T-1,0.9,litro
+P023,VHF Portátil Standard Horizon HX210,Eletrônica,Rádios,680.00,1080.00,20,Standard Horizon,STH-HX210,0.28,unidade
+P024,Piloto Automático Simrad TP22,Eletrônica,Pilotos,3200.00,5200.00,8,Simrad,SIM-TP22,1.2,unidade
+P025,LED Luzes de Navegação Inox,Eletrônica,Iluminação,185.00,320.00,45,Navisafe,NAV-LED-INX,0.4,conjunto

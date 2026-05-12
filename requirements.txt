@@ -1,0 +1,36 @@
+# LH Nautical — Dependências do Projeto
+# Instale com: pip install -r requirements.txt
+
+# Core de dados
+pandas==2.2.2
+numpy==1.26.4
+pyarrow==16.1.0          # engine Parquet para leitura/escrita Gold/Silver
+
+# Machine Learning e Estatística
+scikit-learn==1.5.0      # regressão linear, métricas de avaliação
+
+# Visualização
+matplotlib==3.9.0
+seaborn==0.13.2
+
+# Notebooks
+jupyter==1.0.0
+ipykernel==6.29.5
+
+# Qualidade de dados (opcional, mas recomendado)
+great-expectations==0.18.19
+
+# Utilitários
+python-dotenv==1.0.1     # variáveis de ambiente
+tqdm==4.66.4             # barras de progresso em pipelines longos
+
+# Desenvolvimento
+black==24.4.2            # formatador de código
+isort==5.13.2            # ordenação de imports
+flake8==7.0.0            # linter
+
+# Futuras integrações (comentadas até implementação)
+# dbt-core==1.8.0        # quando migrar transformações para dbt
+# pyspark==3.5.1         # quando escalar para Databricks
+# prophet==1.1.5         # quando houver 3+ anos de histórico
+# mlflow==2.13.0         # quando formalizar ciclo de ML
