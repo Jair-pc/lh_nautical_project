@@ -1,217 +1,873 @@
-/* ===================== GLOBAL ===================== */
-[data-testid="stAppViewContainer"] {
-    background-color: #F5F5F5;
-}
-[data-testid="stMain"] {
-    background-color: #F5F5F5;
-}
-.block-container {
-    padding-top: 1.5rem !important;
-    padding-bottom: 2rem !important;
+/* ==============================================================
+   LH NAUTICAL — CAPTAIN'S ALMANAC
+   Editorial nautical theme. Captain's ledger meets modern BI.
+   ============================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* — palette ———————————————————————————————————————— */
+    --paper-cream:  #F4EBDD;
+    --paper-light:  #FAF4E5;
+    --paper-dark:   #E8DBC2;
+    --ink-black:    #1A1816;
+    --ink-soft:     #4A4641;
+    --ink-faded:    #7A746A;
+    --navy-deep:    #0F2B46;
+    --navy-mid:     #1A4267;
+    --navy-soft:    #DCE4ED;
+    --seal-red:     #A23226;
+    --moss-green:   #3D5739;
+    --gold-patina:  #A88A48;
+    --gold-soft:    #D4BA7E;
+    --rule-line:    #D9CCB1;
+    --rule-faint:   #E7DCC4;
+
+    /* — typography ————————————————————————————————————— */
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body:    'Inter Tight', system-ui, sans-serif;
+    --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+    /* — opticals ——————————————————————————————————————— */
+    --fr-display: "opsz" 144, "wght" 400, "SOFT" 0;
+    --fr-numeral: "opsz" 144, "wght" 350, "SOFT" 20;
+    --fr-headline:"opsz" 72,  "wght" 500, "SOFT" 0;
+    --fr-italic:  "opsz" 24,  "wght" 360, "SOFT" 40;
 }
 
-/* ===================== SIDEBAR ===================== */
+/* ==============================================================
+   GLOBAL — paper background with subtle noise
+   ============================================================== */
+[data-testid="stAppViewContainer"],
+[data-testid="stMain"] {
+    background-color: var(--paper-cream);
+    background-image:
+        /* subtle paper noise */
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0 0.07 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
+        /* compass rose watermark */
+        radial-gradient(circle at 92% 14%, rgba(15,43,70,0.04) 0%, transparent 32%);
+    background-size: 240px 240px, 100% 100%;
+}
+
+.block-container {
+    padding-top: 2.4rem !important;
+    padding-bottom: 4rem !important;
+    max-width: 1240px !important;
+}
+
+/* base typography reset */
+html, body, [class*="css"], [data-testid="stMarkdownContainer"] {
+    font-family: var(--font-body);
+    color: var(--ink-black);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "ss02", "cv11";
+}
+
+p { color: var(--ink-soft); line-height: 1.6; }
+
+/* ==============================================================
+   SIDEBAR — leather-bound ledger
+   ============================================================== */
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #0D47A1 0%, #1565C0 60%, #1976D2 100%);
-    border-right: none;
+    background: linear-gradient(178deg, #0F2B46 0%, #143654 50%, #0F2B46 100%);
+    background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' seed='8'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 0.9 0 0 0 0 0.7 0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
+        linear-gradient(178deg, #0F2B46 0%, #143654 50%, #0F2B46 100%);
+    border-right: 1px solid rgba(212, 186, 126, 0.18);
+    box-shadow: inset -1px 0 0 rgba(212, 186, 126, 0.12);
 }
-[data-testid="stSidebar"] .stMarkdown,
-[data-testid="stSidebar"] label,
-[data-testid="stSidebar"] span,
-[data-testid="stSidebar"] p {
-    color: rgba(255,255,255,0.90) !important;
+
+[data-testid="stSidebar"] * {
+    font-family: var(--font-body);
+    color: rgba(244, 235, 221, 0.78) !important;
 }
+
 [data-testid="stSidebar"] h1,
 [data-testid="stSidebar"] h2,
 [data-testid="stSidebar"] h3 {
-    color: #FFFFFF !important;
-}
-[data-testid="stSidebar"] hr {
-    border-color: rgba(255,255,255,0.25) !important;
-}
-[data-testid="stSidebarNav"] a {
-    color: rgba(255,255,255,0.85) !important;
-    border-radius: 8px;
-    padding: 6px 10px;
-    transition: background 0.2s;
-}
-[data-testid="stSidebarNav"] a:hover,
-[data-testid="stSidebarNav"] a[aria-current="page"] {
-    background: rgba(255,255,255,0.15) !important;
-    color: #FFFFFF !important;
+    color: var(--paper-cream) !important;
+    font-family: var(--font-display);
+    font-variation-settings: var(--fr-headline);
+    letter-spacing: -0.01em;
 }
 
-/* ===================== PAGE HEADER ===================== */
+[data-testid="stSidebar"] hr {
+    border: none;
+    height: 1px;
+    background: rgba(212, 186, 126, 0.24) !important;
+    margin: 1rem 0;
+}
+
+[data-testid="stSidebarNav"] a {
+    color: rgba(244, 235, 221, 0.72) !important;
+    border-left: 2px solid transparent;
+    border-radius: 0;
+    padding: 8px 12px 8px 14px;
+    transition: all 0.25s ease;
+    font-size: 0.94rem;
+}
+[data-testid="stSidebarNav"] a:hover {
+    background: rgba(212, 186, 126, 0.08) !important;
+    color: var(--paper-cream) !important;
+    border-left-color: var(--gold-soft) !important;
+}
+[data-testid="stSidebarNav"] a[aria-current="page"] {
+    background: rgba(212, 186, 126, 0.12) !important;
+    color: var(--gold-soft) !important;
+    border-left-color: var(--gold-patina) !important;
+    font-weight: 500;
+}
+
+/* sidebar brand block */
+.sidebar-logo {
+    text-align: center;
+    padding: 1.4rem 0 1.2rem 0;
+    border-bottom: 1px solid rgba(212, 186, 126, 0.20);
+    margin-bottom: 1.2rem;
+    position: relative;
+}
+.sidebar-logo::before,
+.sidebar-logo::after {
+    content: "✦";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+    color: var(--gold-patina);
+    opacity: 0.45;
+    font-size: 0.75rem;
+}
+.sidebar-logo::before { left: 18%; }
+.sidebar-logo::after  { right: 18%; }
+
+.sidebar-logo .company-name {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "wght" 500, "SOFT" 0;
+    font-size: 1.55rem;
+    color: var(--paper-cream) !important;
+    letter-spacing: -0.015em;
+    line-height: 1;
+}
+.sidebar-logo .company-sub {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--gold-soft) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.30em;
+    margin-top: 0.6rem;
+    font-weight: 400;
+}
+
+/* sidebar form controls */
+[data-testid="stSidebar"] .stMultiSelect [data-baseweb="tag"] {
+    background: rgba(212, 186, 126, 0.18) !important;
+    border: 1px solid rgba(212, 186, 126, 0.30);
+}
+[data-testid="stSidebar"] .stMultiSelect [data-baseweb="tag"] span {
+    color: var(--paper-cream) !important;
+}
+
+/* ==============================================================
+   ALMANAC HERO — magazine cover treatment
+   ============================================================== */
+.almanac-hero {
+    position: relative;
+    padding: 2.6rem 0 2.4rem 0;
+    margin: 0.5rem 0 2.8rem 0;
+    border-top: 1px solid var(--ink-black);
+    border-bottom: 3px double var(--ink-black);
+    text-align: center;
+    animation: fadeUp 0.9s cubic-bezier(.2,.7,.2,1) both;
+}
+
+.almanac-hero::before {
+    /* double-line decorative rule under top border */
+    content: "";
+    position: absolute;
+    top: 4px; left: 0; right: 0;
+    height: 1px;
+    background: var(--ink-black);
+}
+
+.almanac-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0.4rem 0 1.6rem 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+.almanac-eyebrow .dot {
+    display: inline-block;
+    width: 4px; height: 4px;
+    background: var(--seal-red);
+    border-radius: 50%;
+    margin-top: -2px;
+}
+
+.almanac-title {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "wght" 380, "SOFT" 30;
+    font-size: clamp(3.8rem, 9.5vw, 8.2rem);
+    line-height: 0.88;
+    letter-spacing: -0.035em;
+    color: var(--ink-black);
+    margin: 0 0 0.6rem 0;
+    text-rendering: geometricPrecision;
+}
+.almanac-title em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "wght" 360, "SOFT" 80;
+    color: var(--navy-deep);
+}
+
+.almanac-subtitle {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 24, "wght" 360, "SOFT" 50;
+    font-style: italic;
+    font-size: clamp(1.05rem, 1.9vw, 1.35rem);
+    color: var(--ink-soft);
+    margin: 0.8rem 0 1.6rem 0;
+    letter-spacing: 0.01em;
+}
+
+.almanac-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-top: 0.6rem;
+}
+.almanac-meta .sep {
+    color: var(--gold-patina);
+    font-family: var(--font-display);
+    font-style: italic;
+    letter-spacing: 0;
+}
+
+/* compass ornament centered between title and subtitle */
+.almanac-compass {
+    display: inline-block;
+    margin: 0.7rem 0 0.5rem 0;
+    font-size: 1.5rem;
+    color: var(--gold-patina);
+    letter-spacing: 0.5rem;
+    opacity: 0.85;
+}
+
+/* hide default streamlit header padding spacer */
+.almanac-hero + div { margin-top: 0 !important; }
+
+/* ==============================================================
+   FOLIO — section dividers like book chapter heads
+   ============================================================== */
+.folio {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.4rem;
+    margin: 2.6rem 0 1.6rem 0;
+    animation: fadeUp 0.8s cubic-bezier(.2,.7,.2,1) both;
+}
+
+.folio-number {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "wght" 350, "SOFT" 0;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--seal-red);
+    letter-spacing: 0.04em;
+}
+
+.folio-title {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.34em;
+    color: var(--ink-black);
+}
+
+.folio-rule {
+    height: 1px;
+    background: var(--ink-black);
+    position: relative;
+}
+.folio-rule::after {
+    content: "";
+    position: absolute;
+    inset: 3px 0 -4px 0;
+    border-bottom: 1px solid var(--ink-black);
+}
+
+.folio-mark {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--ink-faded);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+/* simpler section title (used by other pages) */
+.section-title {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.34em;
+    color: var(--ink-black);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--ink-black);
+    margin: 2rem 0 1.2rem 0;
+    position: relative;
+}
+.section-title::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    bottom: -4px;
+    height: 1px;
+    background: var(--ink-black);
+}
+
+/* main-header (used by other pages — fallback) */
 .main-header {
-    background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
-    padding: 1.75rem 2rem;
-    border-radius: 14px;
-    margin-bottom: 1.75rem;
-    box-shadow: 0 6px 24px rgba(21,101,192,0.28);
+    background: var(--paper-light);
+    border: 1px solid var(--rule-line);
+    border-left: 4px solid var(--navy-deep);
+    padding: 1.4rem 1.8rem;
+    border-radius: 0;
+    margin-bottom: 2rem;
+    box-shadow: none;
+    position: relative;
+}
+.main-header::before {
+    content: "✦";
+    position: absolute;
+    top: 14px; right: 22px;
+    color: var(--gold-patina);
+    font-size: 0.85rem;
+    opacity: 0.7;
 }
 .main-header h1 {
-    color: #FFFFFF !important;
-    font-size: 1.85rem;
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 72, "wght" 500, "SOFT" 0;
+    color: var(--ink-black) !important;
+    font-size: 2rem;
+    font-weight: 500;
     margin: 0 0 0.3rem 0;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
 }
 .main-header p {
-    color: rgba(255,255,255,0.80);
+    font-family: var(--font-body);
+    color: var(--ink-soft);
     margin: 0;
     font-size: 0.95rem;
 }
 
-/* ===================== KPI CARDS ===================== */
-.kpi-card {
-    background: #FFFFFF;
-    border-radius: 12px;
-    padding: 1.2rem 1.4rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-    border-left: 4px solid #1565C0;
-    transition: transform 0.22s ease, box-shadow 0.22s ease;
-    height: 100%;
+/* ==============================================================
+   ALMANAC CARDS — KPIs as catalog entries
+   ============================================================== */
+.almanac-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--ink-black);
+    border: 1px solid var(--ink-black);
+    margin-bottom: 2.2rem;
 }
-.kpi-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-}
-.kpi-card.success { border-left-color: #2E7D32; }
-.kpi-card.warning { border-left-color: #E65100; }
-.kpi-card.neutral { border-left-color: #546E7A; }
-.kpi-card.danger  { border-left-color: #C62828; }
-
-.kpi-label {
-    font-size: 0.70rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    color: #546E7A;
-    margin-bottom: 0.45rem;
-}
-.kpi-value {
-    font-size: 1.65rem;
-    font-weight: 700;
-    color: #1A237E;
-    line-height: 1.1;
-}
-.kpi-sub {
-    font-size: 0.78rem;
-    color: #78909C;
-    margin-top: 0.3rem;
-}
-.kpi-delta-pos { color: #2E7D32; font-size: 0.78rem; font-weight: 600; }
-.kpi-delta-neg { color: #C62828; font-size: 0.78rem; font-weight: 600; }
-
-/* ===================== SECTION HEADERS ===================== */
-.section-title {
-    font-size: 1.0rem;
-    font-weight: 700;
-    color: #1565C0;
-    padding-bottom: 0.4rem;
-    border-bottom: 2px solid #E3F2FD;
-    margin: 1.2rem 0 0.9rem 0;
-    letter-spacing: -0.01em;
+@media (max-width: 760px) {
+    .almanac-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* ===================== CHART CONTAINERS ===================== */
-.chart-box {
-    background: #FFFFFF;
-    border-radius: 12px;
-    padding: 1.25rem 1.25rem 0.75rem 1.25rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-    margin-bottom: 1rem;
+.almanac-entry {
+    background: var(--paper-light);
+    padding: 1.4rem 1.4rem 1.2rem 1.4rem;
+    position: relative;
+    transition: background 0.3s ease;
+    animation: fadeUp 0.7s cubic-bezier(.2,.7,.2,1) both;
+}
+.almanac-entry:nth-child(1) { animation-delay: 0.10s; }
+.almanac-entry:nth-child(2) { animation-delay: 0.18s; }
+.almanac-entry:nth-child(3) { animation-delay: 0.26s; }
+.almanac-entry:nth-child(4) { animation-delay: 0.34s; }
+.almanac-entry:nth-child(5) { animation-delay: 0.42s; }
+.almanac-entry:nth-child(6) { animation-delay: 0.50s; }
+
+.almanac-entry:hover {
+    background: var(--paper-cream);
 }
 
-/* ===================== INSIGHT BOX ===================== */
-.insight-box {
-    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
-    border-radius: 10px;
-    padding: 0.9rem 1.3rem;
-    border-left: 4px solid #1565C0;
-    margin: 0.6rem 0 1rem 0;
-}
-.insight-box .ititle {
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: #0D47A1;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-}
-.insight-box .itext {
-    font-size: 0.92rem;
-    color: #1565C0;
-    margin-top: 0.2rem;
-}
-
-/* ===================== ALERT BADGE ===================== */
-.badge {
-    display: inline-block;
-    padding: 0.18rem 0.55rem;
-    border-radius: 20px;
-    font-size: 0.72rem;
-    font-weight: 700;
+.almanac-entry .roman {
+    position: absolute;
+    top: 12px; right: 14px;
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 24, "wght" 350, "SOFT" 0;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--gold-patina);
     letter-spacing: 0.04em;
 }
-.badge-blue    { background: #E3F2FD; color: #1565C0; }
-.badge-green   { background: #E8F5E9; color: #2E7D32; }
-.badge-orange  { background: #FBE9E7; color: #E65100; }
-.badge-red     { background: #FFEBEE; color: #C62828; }
-.badge-gray    { background: #ECEFF1; color: #546E7A; }
 
-/* ===================== METRIC OVERRIDE ===================== */
+.almanac-entry .label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--ink-soft);
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule-line);
+}
+
+.almanac-entry .figure {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "wght" 340, "SOFT" 0;
+    font-size: clamp(1.85rem, 3vw, 2.4rem);
+    line-height: 1;
+    color: var(--ink-black);
+    letter-spacing: -0.025em;
+    font-feature-settings: "tnum", "lnum", "ss01";
+    margin-bottom: 0.45rem;
+}
+
+.almanac-entry .unit {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 24, "wght" 350, "SOFT" 60;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--seal-red);
+    margin-left: 0.18rem;
+    vertical-align: 0.32em;
+}
+
+.almanac-entry .note {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+    font-style: italic;
+    line-height: 1.35;
+    margin-top: 0.4rem;
+}
+
+/* ==============================================================
+   KPI CARDS (legacy class used by other pages — restyled)
+   ============================================================== */
+.kpi-card {
+    background: var(--paper-light);
+    border: 1px solid var(--rule-line);
+    border-left: 3px solid var(--navy-deep);
+    border-radius: 0;
+    padding: 1.1rem 1.3rem;
+    box-shadow: none;
+    transition: background 0.3s ease;
+    height: 100%;
+    position: relative;
+}
+.kpi-card:hover { background: var(--paper-cream); transform: none; box-shadow: none; }
+.kpi-card.success { border-left-color: var(--moss-green); }
+.kpi-card.warning { border-left-color: var(--gold-patina); }
+.kpi-card.neutral { border-left-color: var(--ink-faded); }
+.kpi-card.danger  { border-left-color: var(--seal-red); }
+
+.kpi-label {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.26em;
+    color: var(--ink-soft);
+    margin-bottom: 0.55rem;
+}
+.kpi-value {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "wght" 360, "SOFT" 0;
+    font-size: 1.85rem;
+    line-height: 1.05;
+    color: var(--ink-black);
+    letter-spacing: -0.025em;
+    font-feature-settings: "tnum", "lnum";
+}
+.kpi-sub {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+    font-style: italic;
+    margin-top: 0.35rem;
+}
+.kpi-delta-pos { color: var(--moss-green); font-family: var(--font-mono); font-size: 0.74rem; font-weight: 500; }
+.kpi-delta-neg { color: var(--seal-red); font-family: var(--font-mono); font-size: 0.74rem; font-weight: 500; }
+
+/* ==============================================================
+   STREAMLIT NATIVE METRIC — themed to match
+   ============================================================== */
 [data-testid="metric-container"] {
-    background: #FFFFFF;
-    border: 1px solid #E3F2FD;
-    border-radius: 12px;
+    background: var(--paper-light);
+    border: 1px solid var(--rule-line);
+    border-radius: 0;
     padding: 1rem 1.1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: none;
 }
 [data-testid="stMetricValue"] {
-    font-size: 1.55rem !important;
-    font-weight: 700 !important;
-    color: #1A237E !important;
+    font-family: var(--font-display) !important;
+    font-variation-settings: "opsz" 144, "wght" 360, "SOFT" 0 !important;
+    font-size: 1.7rem !important;
+    font-weight: 400 !important;
+    color: var(--ink-black) !important;
+    letter-spacing: -0.022em !important;
+    font-feature-settings: "tnum", "lnum" !important;
 }
 [data-testid="stMetricLabel"] {
-    font-size: 0.75rem !important;
-    font-weight: 600 !important;
-    color: #546E7A !important;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    font-family: var(--font-mono) !important;
+    font-size: 0.64rem !important;
+    font-weight: 500 !important;
+    color: var(--ink-soft) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.26em !important;
 }
 [data-testid="stMetricDelta"] svg { display: none; }
 
-/* ===================== TABLES ===================== */
-.dataframe { border-radius: 8px; overflow: hidden; }
-.dataframe thead th {
-    background: #E3F2FD !important;
-    color: #1565C0 !important;
+/* ==============================================================
+   CARTOGRAPHY — architecture table styled like a nautical chart
+   ============================================================== */
+.cartography {
+    background: var(--paper-light);
+    border: 1px solid var(--ink-black);
+    padding: 0;
+    margin-bottom: 1.6rem;
+    animation: fadeUp 0.9s cubic-bezier(.2,.7,.2,1) both;
+    animation-delay: 0.4s;
+}
+
+.cartography-head {
+    padding: 0.7rem 1.2rem;
+    background: var(--paper-dark);
+    border-bottom: 1px solid var(--ink-black);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.cartography-head .title {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 72, "wght" 500, "SOFT" 0;
+    font-size: 1.1rem;
+    color: var(--ink-black);
+    letter-spacing: -0.01em;
+}
+.cartography-head .sub {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--ink-soft);
+}
+
+.cartography-row {
+    display: grid;
+    grid-template-columns: 56px 130px 1fr 110px;
+    gap: 1.2rem;
+    padding: 1rem 1.4rem;
+    align-items: center;
+    border-bottom: 1px solid var(--rule-faint);
+    transition: background 0.2s ease;
+}
+.cartography-row:last-child { border-bottom: none; }
+.cartography-row:hover { background: var(--paper-cream); }
+
+.cartography-row .seal {
+    width: 36px; height: 36px;
+    border: 1px solid var(--ink-black);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--ink-black);
+    background: var(--paper-cream);
+    position: relative;
+}
+.cartography-row .seal::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border: 1px dashed var(--ink-faded);
+    border-radius: 50%;
+    opacity: 0.45;
+}
+
+.cartography-row .layer {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 72, "wght" 500, "SOFT" 0;
+    font-size: 1.15rem;
+    color: var(--ink-black);
+    letter-spacing: 0.01em;
+}
+.cartography-row .desc {
+    font-family: var(--font-body);
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+.cartography-row .desc em {
+    color: var(--navy-deep);
+    font-style: italic;
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 24, "wght" 460, "SOFT" 40;
+}
+.cartography-row .count {
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    text-align: right;
+    color: var(--ink-black);
+    font-feature-settings: "tnum", "lnum";
+    font-weight: 500;
+}
+.cartography-row .count .unit {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-top: 2px;
+    font-weight: 400;
+}
+
+/* ==============================================================
+   FILES MANIFEST — gold parquet status, ledger-style
+   ============================================================== */
+.manifest {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--ink-black);
+    border: 1px solid var(--ink-black);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.7s cubic-bezier(.2,.7,.2,1) both;
+    animation-delay: 0.55s;
+}
+
+.manifest-row {
+    background: var(--paper-light);
+    padding: 1rem 1.2rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.9rem;
+    align-items: center;
+}
+
+.manifest-row .check {
+    width: 24px; height: 24px;
+    background: var(--moss-green);
+    color: var(--paper-cream);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
     font-weight: 700;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    font-family: var(--font-mono);
 }
 
-/* ===================== SCROLLBAR ===================== */
-::-webkit-scrollbar          { width: 5px; height: 5px; }
-::-webkit-scrollbar-track    { background: #F5F5F5; }
-::-webkit-scrollbar-thumb    { background: #B0BEC5; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #546E7A; }
+.manifest-row .info .name {
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--ink-black);
+    letter-spacing: -0.01em;
+}
+.manifest-row .info .size {
+    font-family: var(--font-body);
+    font-size: 0.74rem;
+    color: var(--ink-faded);
+    font-style: italic;
+    margin-top: 2px;
+}
 
-/* ===================== SIDEBAR LOGO AREA ===================== */
-.sidebar-logo {
+@media (max-width: 760px) {
+    .manifest { grid-template-columns: 1fr; }
+}
+
+/* ==============================================================
+   COLOPHON — footer like a book's last page
+   ============================================================== */
+.colophon {
+    margin-top: 3.2rem;
+    padding: 2rem 0 1rem 0;
+    border-top: 3px double var(--ink-black);
     text-align: center;
-    padding: 1.5rem 0 1rem 0;
+    position: relative;
 }
-.sidebar-logo .company-name {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: #FFFFFF;
-    letter-spacing: -0.02em;
+.colophon::after {
+    content: "";
+    position: absolute;
+    top: 7px; left: 0; right: 0;
+    height: 1px;
+    background: var(--ink-black);
 }
-.sidebar-logo .company-sub {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.65);
+.colophon .ornament {
+    color: var(--gold-patina);
+    font-size: 0.95rem;
+    letter-spacing: 0.6rem;
+    margin: 0.5rem 0 1rem 0;
+    opacity: 0.75;
+}
+.colophon .text {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 24, "wght" 360, "SOFT" 40;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+}
+.colophon .meta {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    color: var(--ink-faded);
+    margin-top: 1rem;
 }
+
+/* ==============================================================
+   CHARTS / INSIGHT (other pages)
+   ============================================================== */
+.chart-box {
+    background: var(--paper-light);
+    border: 1px solid var(--rule-line);
+    border-radius: 0;
+    padding: 1.25rem 1.25rem 0.75rem 1.25rem;
+    box-shadow: none;
+    margin-bottom: 1rem;
+}
+
+.insight-box {
+    background: var(--paper-light);
+    border: 1px solid var(--rule-line);
+    border-left: 3px solid var(--seal-red);
+    border-radius: 0;
+    padding: 0.95rem 1.3rem;
+    margin: 0.8rem 0 1.2rem 0;
+    position: relative;
+}
+.insight-box .ititle {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 500;
+    color: var(--seal-red);
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+}
+.insight-box .itext {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 24, "wght" 380, "SOFT" 30;
+    font-style: italic;
+    font-size: 1.02rem;
+    color: var(--ink-black);
+    margin-top: 0.3rem;
+    line-height: 1.5;
+}
+
+/* ==============================================================
+   BADGES
+   ============================================================== */
+.badge {
+    display: inline-block;
+    padding: 0.18rem 0.65rem;
+    border-radius: 0;
+    border: 1px solid currentColor;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+}
+.badge-blue   { color: var(--navy-deep); background: transparent; }
+.badge-green  { color: var(--moss-green); background: transparent; }
+.badge-orange { color: var(--gold-patina); background: transparent; }
+.badge-red    { color: var(--seal-red); background: transparent; }
+.badge-gray   { color: var(--ink-faded); background: transparent; }
+
+/* ==============================================================
+   TABLES
+   ============================================================== */
+.dataframe {
+    border-radius: 0;
+    border: 1px solid var(--ink-black);
+    overflow: hidden;
+    font-family: var(--font-body);
+}
+.dataframe thead th {
+    background: var(--paper-dark) !important;
+    color: var(--ink-black) !important;
+    font-family: var(--font-mono) !important;
+    font-weight: 500;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    border-bottom: 1px solid var(--ink-black) !important;
+}
+.dataframe tbody td {
+    font-feature-settings: "tnum", "lnum";
+    color: var(--ink-black);
+}
+
+/* ==============================================================
+   ALERTS — st.success / warning / error
+   ============================================================== */
+[data-testid="stAlert"] {
+    border-radius: 0 !important;
+    border: 1px solid var(--rule-line) !important;
+    background: var(--paper-light) !important;
+}
+[data-testid="stAlert"][kind="success"] { border-left: 3px solid var(--moss-green) !important; }
+[data-testid="stAlert"][kind="warning"] { border-left: 3px solid var(--gold-patina) !important; }
+[data-testid="stAlert"][kind="error"]   { border-left: 3px solid var(--seal-red) !important; }
+[data-testid="stAlert"][kind="info"]    { border-left: 3px solid var(--navy-deep) !important; }
+
+/* ==============================================================
+   SCROLLBAR
+   ============================================================== */
+::-webkit-scrollbar          { width: 8px; height: 8px; }
+::-webkit-scrollbar-track    { background: var(--paper-dark); }
+::-webkit-scrollbar-thumb    { background: var(--ink-faded); border-radius: 0; border: 2px solid var(--paper-dark); }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-black); }
+
+/* ==============================================================
+   ANIMATIONS
+   ============================================================== */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes inkBleed {
+    from { letter-spacing: -0.06em; opacity: 0; }
+    to   { letter-spacing: -0.035em; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
+}
+
+/* ==============================================================
+   HIDE DEFAULT STREAMLIT CHROME
+   ============================================================== */
+header[data-testid="stHeader"] {
+    background: transparent;
+    height: 0;
+}
+[data-testid="stToolbar"] { display: none; }
+footer { display: none !important; }
+#MainMenu { visibility: hidden; }
