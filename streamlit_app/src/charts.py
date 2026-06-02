@@ -2,21 +2,46 @@ import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
 
-# ── paleta oficial LH Nautical ─────────────────────────────────────────────────
+# ── paleta editorial Captain's Almanac ────────────────────────────────────────
 C = {
-    "primary":  "#1565C0",
-    "success":  "#2E7D32",
-    "warning":  "#E65100",
-    "neutral":  "#546E7A",
-    "danger":   "#C62828",
-    "bg":       "#F5F5F5",
-    "white":    "#FFFFFF",
+    "navy":    "#0F2B46",  # tinta marinha (primária)
+    "navy_m":  "#1A4267",  # tinta marinha média
+    "seal":    "#A23226",  # vermelho selo (atenção)
+    "gold":    "#A88A48",  # dourado patinado (destaque)
+    "moss":    "#3D5739",  # verde musgo (positivo)
+    "ink":     "#1A1816",  # tinta carvão (texto)
+    "ink_s":   "#4A4641",  # tinta carvão soft
+    "ink_f":   "#7A746A",  # tinta faded
+    "paper":   "#F4EBDD",  # papel marfim (fundo)
+    "paper_l": "#FAF4E5",  # papel claro
+    "rule":    "#D9CCB1",  # linha de regra
+    "rule_f":  "#E7DCC4",  # rule faint
+    # legacy aliases (não quebrar páginas existentes)
+    "primary": "#0F2B46",
+    "success": "#3D5739",
+    "warning": "#A88A48",
+    "neutral": "#7A746A",
+    "danger":  "#A23226",
+    "bg":      "#F4EBDD",
+    "white":   "#FAF4E5",
 }
 PALETTE = [
-    "#1565C0", "#2E7D32", "#E65100", "#546E7A", "#7B1FA2",
-    "#00695C", "#C62828", "#F57F17", "#1B5E20", "#880E4F",
+    "#0F2B46",  # navy deep
+    "#A23226",  # seal red
+    "#3D5739",  # moss green
+    "#A88A48",  # gold patina
+    "#1A4267",  # navy mid
+    "#7A5C40",  # bronze
+    "#4A4641",  # ink soft
+    "#5E7158",  # moss soft
+    "#8B6E3D",  # gold dark
+    "#5C2E26",  # seal dark
 ]
-TEMPLATE = "plotly_white"
+TEMPLATE = "simple_white"
+
+# fonte editorial (fallback chain — Plotly carrega via @import do styles.css)
+FONT_FAMILY = "'Fraunces', Georgia, 'Times New Roman', serif"
+FONT_MONO   = "'JetBrains Mono', ui-monospace, monospace"
 
 
 def _color_map(series: pd.Series) -> dict:
@@ -25,18 +50,47 @@ def _color_map(series: pd.Series) -> dict:
     return {v: PALETTE[i % len(PALETTE)] for i, v in enumerate(vals)}
 
 
-def _base(fig: go.Figure, title: str = "", height: int = 380) -> go.Figure:
+def _base(fig: go.Figure, title: str = "", height: int = 380, margin_r: int = 110) -> go.Figure:
+    """
+    Base layout for all charts. `margin_r=110` gives breathing room for
+    `textposition='outside'` labels on horizontal bars like "R$ 83.500.000".
+    """
     fig.update_layout(
-        title=dict(text=title, font=dict(size=15, color="#1A237E"), x=0, pad=dict(l=4)),
+        title=dict(
+            text=title,
+            font=dict(family=FONT_FAMILY, size=16, color=C["ink"]),
+            x=0, pad=dict(l=4, t=4),
+        ),
         template=TEMPLATE,
         height=height,
-        margin=dict(l=12, r=12, t=44, b=12),
+        margin=dict(l=16, r=margin_r, t=52, b=24),
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
-        font=dict(family="sans-serif", size=12, color="#424242"),
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-        hoverlabel=dict(bgcolor="white", font_size=12, bordercolor="#E3F2FD"),
+        font=dict(family=FONT_FAMILY, size=12, color=C["ink_s"]),
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.04, xanchor="right", x=1,
+            font=dict(family=FONT_MONO, size=10, color=C["ink_s"]),
+            bgcolor="rgba(0,0,0,0)",
+        ),
+        hoverlabel=dict(
+            bgcolor=C["paper_l"],
+            bordercolor=C["ink"],
+            font=dict(family=FONT_FAMILY, size=12, color=C["ink"]),
+        ),
     )
+    # axis ticks in mono so numerals are tabular
+    fig.update_xaxes(
+        tickfont=dict(family=FONT_MONO, size=10, color=C["ink_f"]),
+        title_font=dict(family=FONT_MONO, size=10, color=C["ink_s"]),
+        gridcolor=C["rule_f"], zerolinecolor=C["rule"], linecolor=C["rule"],
+    )
+    fig.update_yaxes(
+        tickfont=dict(family=FONT_MONO, size=10, color=C["ink_f"]),
+        title_font=dict(family=FONT_MONO, size=10, color=C["ink_s"]),
+        gridcolor=C["rule_f"], zerolinecolor=C["rule"], linecolor=C["rule"],
+    )
+    # let "outside" text labels overflow into margin (avoids cutoff on big values)
+    fig.update_traces(cliponaxis=False)
     return fig
 
 
@@ -182,7 +236,7 @@ def chart_receita_estado(df: pd.DataFrame, height: int = 380) -> go.Figure:
     df = df.sort_values("receita")
     fig = px.bar(df, y="estado", x="receita", orientation="h",
                  color="receita",
-                 color_continuous_scale=[[0, "#BBDEFB"], [1, C["primary"]]],
+                 color_continuous_scale=[[0, C["rule"]], [1, C["navy"]]],
                  text="receita")
     fig.update_traces(
         texttemplate="R$ %{text:,.0f}", textposition="outside",
@@ -217,7 +271,7 @@ def chart_yoy(df: pd.DataFrame, height: int = 380) -> go.Figure:
 
 
 def chart_dia_semana(df: pd.DataFrame, height: int = 340) -> go.Figure:
-    colors = [C["primary"] if p > df["pedidos"].median() else "#90CAF9"
+    colors = [C["navy"] if p > df["pedidos"].median() else C["rule"]
               for p in df["pedidos"]]
     fig = go.Figure(go.Bar(
         x=df["dia_semana"], y=df["receita"],
@@ -238,12 +292,12 @@ def chart_heatmap(pivot: pd.DataFrame, height: int = 340) -> go.Figure:
         z=pivot.values,
         x=pivot.columns.astype(str).tolist(),
         y=[f"Mês {m}" for m in pivot.index.tolist()],
-        colorscale=[[0, "#E3F2FD"], [0.5, C["primary"]], [1, "#0D47A1"]],
+        colorscale=[[0, C["paper_l"]], [0.5, C["gold"]], [1, C["navy"]]],
         hoverongaps=False,
         hovertemplate="Ano: %{x}<br>%{y}<br>Receita: R$ %{z:,.2f}<extra></extra>",
         text=[[f"R$ {v:,.0f}" for v in row] for row in pivot.values],
         texttemplate="%{text}",
-        textfont=dict(size=10, color="white"),
+        textfont=dict(family=FONT_MONO, size=10, color=C["paper"]),
     ))
     _base(fig, "Heatmap de Receita — Mês × Ano", height)
     fig.update_xaxes(title_text="Ano")
