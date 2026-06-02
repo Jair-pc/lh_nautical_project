@@ -1,0 +1,37 @@
+# Render Infrastructure-as-Code
+# Documentacao: https://render.com/docs/blueprint-spec
+#
+# Como usar:
+#   1. Faca login em render.com (pode usar conta GitHub)
+#   2. New +  ->  Blueprint
+#   3. Conecte este repositorio
+#   4. Render le este arquivo e provisiona tudo automaticamente
+#
+# Plano FREE:
+#   - 750h/mes de uptime (suficiente pra um portfolio)
+#   - HTTPS automatico
+#   - Sleep apos 15min sem trafego (acorda em ~30s no primeiro acesso)
+#   - URL: https://lh-nautical-analytics.onrender.com
+#
+services:
+  - type: web
+    name: lh-nautical-analytics
+    runtime: python
+    plan: free
+    region: oregon                       # Oregon = latencia OK pro Brasil
+    branch: main
+
+    buildCommand: pip install -r streamlit_app/requirements.txt
+    startCommand: >-
+      streamlit run streamlit_app/app.py
+      --server.port=$PORT
+      --server.address=0.0.0.0
+      --server.headless=true
+      --server.enableCORS=false
+      --server.enableXsrfProtection=false
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      - key: STREAMLIT_SERVER_FILE_WATCHER_TYPE
+        value: "none"                    # economiza CPU no plano free

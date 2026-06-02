@@ -1,0 +1,217 @@
+/* ===================== GLOBAL ===================== */
+[data-testid="stAppViewContainer"] {
+    background-color: #F5F5F5;
+}
+[data-testid="stMain"] {
+    background-color: #F5F5F5;
+}
+.block-container {
+    padding-top: 1.5rem !important;
+    padding-bottom: 2rem !important;
+}
+
+/* ===================== SIDEBAR ===================== */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #0D47A1 0%, #1565C0 60%, #1976D2 100%);
+    border-right: none;
+}
+[data-testid="stSidebar"] .stMarkdown,
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] span,
+[data-testid="stSidebar"] p {
+    color: rgba(255,255,255,0.90) !important;
+}
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    color: #FFFFFF !important;
+}
+[data-testid="stSidebar"] hr {
+    border-color: rgba(255,255,255,0.25) !important;
+}
+[data-testid="stSidebarNav"] a {
+    color: rgba(255,255,255,0.85) !important;
+    border-radius: 8px;
+    padding: 6px 10px;
+    transition: background 0.2s;
+}
+[data-testid="stSidebarNav"] a:hover,
+[data-testid="stSidebarNav"] a[aria-current="page"] {
+    background: rgba(255,255,255,0.15) !important;
+    color: #FFFFFF !important;
+}
+
+/* ===================== PAGE HEADER ===================== */
+.main-header {
+    background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+    padding: 1.75rem 2rem;
+    border-radius: 14px;
+    margin-bottom: 1.75rem;
+    box-shadow: 0 6px 24px rgba(21,101,192,0.28);
+}
+.main-header h1 {
+    color: #FFFFFF !important;
+    font-size: 1.85rem;
+    font-weight: 700;
+    margin: 0 0 0.3rem 0;
+    letter-spacing: -0.02em;
+}
+.main-header p {
+    color: rgba(255,255,255,0.80);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* ===================== KPI CARDS ===================== */
+.kpi-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border-left: 4px solid #1565C0;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    height: 100%;
+}
+.kpi-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+.kpi-card.success { border-left-color: #2E7D32; }
+.kpi-card.warning { border-left-color: #E65100; }
+.kpi-card.neutral { border-left-color: #546E7A; }
+.kpi-card.danger  { border-left-color: #C62828; }
+
+.kpi-label {
+    font-size: 0.70rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: #546E7A;
+    margin-bottom: 0.45rem;
+}
+.kpi-value {
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: #1A237E;
+    line-height: 1.1;
+}
+.kpi-sub {
+    font-size: 0.78rem;
+    color: #78909C;
+    margin-top: 0.3rem;
+}
+.kpi-delta-pos { color: #2E7D32; font-size: 0.78rem; font-weight: 600; }
+.kpi-delta-neg { color: #C62828; font-size: 0.78rem; font-weight: 600; }
+
+/* ===================== SECTION HEADERS ===================== */
+.section-title {
+    font-size: 1.0rem;
+    font-weight: 700;
+    color: #1565C0;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid #E3F2FD;
+    margin: 1.2rem 0 0.9rem 0;
+    letter-spacing: -0.01em;
+}
+
+/* ===================== CHART CONTAINERS ===================== */
+.chart-box {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 1.25rem 1.25rem 0.75rem 1.25rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 1rem;
+}
+
+/* ===================== INSIGHT BOX ===================== */
+.insight-box {
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+    border-radius: 10px;
+    padding: 0.9rem 1.3rem;
+    border-left: 4px solid #1565C0;
+    margin: 0.6rem 0 1rem 0;
+}
+.insight-box .ititle {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #0D47A1;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+.insight-box .itext {
+    font-size: 0.92rem;
+    color: #1565C0;
+    margin-top: 0.2rem;
+}
+
+/* ===================== ALERT BADGE ===================== */
+.badge {
+    display: inline-block;
+    padding: 0.18rem 0.55rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+.badge-blue    { background: #E3F2FD; color: #1565C0; }
+.badge-green   { background: #E8F5E9; color: #2E7D32; }
+.badge-orange  { background: #FBE9E7; color: #E65100; }
+.badge-red     { background: #FFEBEE; color: #C62828; }
+.badge-gray    { background: #ECEFF1; color: #546E7A; }
+
+/* ===================== METRIC OVERRIDE ===================== */
+[data-testid="metric-container"] {
+    background: #FFFFFF;
+    border: 1px solid #E3F2FD;
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+[data-testid="stMetricValue"] {
+    font-size: 1.55rem !important;
+    font-weight: 700 !important;
+    color: #1A237E !important;
+}
+[data-testid="stMetricLabel"] {
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    color: #546E7A !important;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+[data-testid="stMetricDelta"] svg { display: none; }
+
+/* ===================== TABLES ===================== */
+.dataframe { border-radius: 8px; overflow: hidden; }
+.dataframe thead th {
+    background: #E3F2FD !important;
+    color: #1565C0 !important;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* ===================== SCROLLBAR ===================== */
+::-webkit-scrollbar          { width: 5px; height: 5px; }
+::-webkit-scrollbar-track    { background: #F5F5F5; }
+::-webkit-scrollbar-thumb    { background: #B0BEC5; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #546E7A; }
+
+/* ===================== SIDEBAR LOGO AREA ===================== */
+.sidebar-logo {
+    text-align: center;
+    padding: 1.5rem 0 1rem 0;
+}
+.sidebar-logo .company-name {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: -0.02em;
+}
+.sidebar-logo .company-sub {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
