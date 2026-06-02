@@ -157,13 +157,66 @@ p { color: var(--ink-soft); line-height: 1.6; }
     font-weight: 400;
 }
 
-/* sidebar form controls */
-[data-testid="stSidebar"] .stMultiSelect [data-baseweb="tag"] {
-    background: rgba(212, 186, 126, 0.18) !important;
-    border: 1px solid rgba(212, 186, 126, 0.30);
+/* ───── sidebar form controls — multiselect ledger style ───── */
+/* dropdown container (the row of chips) */
+[data-testid="stSidebar"] [data-baseweb="select"] > div {
+    background: rgba(244, 235, 221, 0.06) !important;
+    border: 1px solid rgba(212, 186, 126, 0.30) !important;
+    border-radius: 2px !important;
 }
-[data-testid="stSidebar"] .stMultiSelect [data-baseweb="tag"] span {
+[data-testid="stSidebar"] [data-baseweb="select"]:hover > div {
+    border-color: rgba(212, 186, 126, 0.55) !important;
+}
+
+/* each selected value chip — readable dark text on light gold bg */
+[data-testid="stSidebar"] [data-baseweb="tag"],
+[data-testid="stSidebar"] [data-baseweb="tag"] > div {
+    background: var(--paper-dark) !important;
+    border: 1px solid var(--gold-patina) !important;
+    border-radius: 2px !important;
+    color: var(--ink-black) !important;
+}
+[data-testid="stSidebar"] [data-baseweb="tag"] *,
+[data-testid="stSidebar"] [data-baseweb="tag"] span,
+[data-testid="stSidebar"] [data-baseweb="tag"] div {
+    color: var(--ink-black) !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.74rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.02em !important;
+}
+/* x icon to remove a tag */
+[data-testid="stSidebar"] [data-baseweb="tag"] svg,
+[data-testid="stSidebar"] [data-baseweb="tag"] path {
+    fill: var(--ink-black) !important;
+    color: var(--ink-black) !important;
+}
+[data-testid="stSidebar"] [data-baseweb="tag"] [role="button"]:hover {
+    background: var(--seal-red) !important;
+}
+[data-testid="stSidebar"] [data-baseweb="tag"] [role="button"]:hover svg {
+    fill: var(--paper-cream) !important;
+}
+
+/* dropdown chevron/clear icons in the select */
+[data-testid="stSidebar"] [data-baseweb="select"] svg {
+    fill: var(--gold-soft) !important;
+}
+
+/* dropdown menu when open — dark paper instead of bright white */
+[data-baseweb="popover"] [role="listbox"] {
+    background: var(--navy-deep) !important;
+    border: 1px solid var(--gold-patina) !important;
+}
+[data-baseweb="popover"] [role="option"] {
+    background: transparent !important;
     color: var(--paper-cream) !important;
+    font-family: var(--font-body) !important;
+}
+[data-baseweb="popover"] [role="option"]:hover,
+[data-baseweb="popover"] [role="option"][aria-selected="true"] {
+    background: rgba(212, 186, 126, 0.18) !important;
+    color: var(--gold-soft) !important;
 }
 
 /* ==============================================================
