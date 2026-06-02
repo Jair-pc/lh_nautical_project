@@ -19,7 +19,7 @@ services:
     runtime: python
     plan: free
     region: oregon                       # Oregon = latencia OK pro Brasil
-    branch: main
+    branch: master
 
     buildCommand: pip install -r streamlit_app/requirements.txt
     startCommand: >-
