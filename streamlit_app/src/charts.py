@@ -89,8 +89,14 @@ def _base(fig: go.Figure, title: str = "", height: int = 380, margin_r: int = 11
         title_font=dict(family=FONT_MONO, size=10, color=C["ink_s"]),
         gridcolor=C["rule_f"], zerolinecolor=C["rule"], linecolor=C["rule"],
     )
-    # let "outside" text labels overflow into margin (avoids cutoff on big values)
-    fig.update_traces(cliponaxis=False)
+    # let "outside" text labels overflow into the right margin (avoids cutoff
+    # on horizontal bars like "R$ 83.500.000"). Pie/Heatmap/Treemap traces
+    # don't support cliponaxis, so we skip them silently.
+    for trace in fig.data:
+        try:
+            trace.cliponaxis = False
+        except (ValueError, AttributeError, TypeError):
+            pass
     return fig
 
 
