@@ -2,11 +2,16 @@
 # LH Nautical — .gitignore
 # ==============================================
 
-# Camadas geradas pelo pipeline — não versionar (reproduzíveis)
+# Camadas geradas pelo pipeline
+# Silver: não versionar (intermediário, reproduzível)
 data/silver/
-data/gold/
-*.parquet
 *.csv.gz
+
+# Gold: VERSIONADO para que o app Streamlit (deploy Render) funcione sem rodar o pipeline
+# Tamanho atual ~280 KB (fato_vendas + dim_clientes + dim_produtos) — vale a pena versionar
+# Se crescer, considerar rodar o ETL no buildCommand do Render
+!data/gold/
+!data/gold/*.parquet
 
 # Bronze e RAW: dados de entrada versionados (necessários para rodar o pipeline)
 # data/bronze/ e data/raw/ são incluídos intencionalmente
