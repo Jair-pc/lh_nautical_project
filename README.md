@@ -1,6 +1,10 @@
 # LH Nautical — Projeto Completo de Dados
 ### Do Caos de Planilhas à Plataforma Analítica Profissional
 
+🚀 **[App ao vivo (Streamlit)](https://lh-nautical-analytics.onrender.com)** · 📖 **[Estudo de caso no portfólio](https://jrdados.com.br/projeto-lh-nautical.html)**
+
+> ⏱ O app está hospedado no plano gratuito do Render — o **primeiro acesso pode levar ~30–60s** enquanto o servidor "acorda".
+
 ---
 
 ## Sobre a Empresa
@@ -155,10 +159,12 @@ Apenas 2% da receita vem da loja física de Florianópolis.
 Com 49 clientes fazendo ~200 pedidos cada, o perfil é de distribuidores e revendedores,
 não consumidores finais. Estratégia de relacionamento deve ser personalizada por conta.
 
-**4. Alta concentração de receita — risco**
-Os top 5 clientes respondem por ~33% do faturamento total.
-Perder um cliente impacta significativamente o resultado.
-> *Diversificação da base é prioridade estratégica.*
+**4. Concentração saudável de receita**
+Os top 5 clientes respondem por **12,7%** da receita e os top 10 por **24,4%** —
+base bem distribuída, sem dependência crítica de um único cliente.
+Aliada à recorrência de 100% (zero clientes one-time), o foco estratégico
+se desloca da aquisição para a **expansão por conta**.
+> *Relacionamento personalizado para o top 10 e reativação de contas inativas.*
 
 **5. Oportunidade de cross-sell identificada**
 5 produtos (IDs 11, 35, 51, 103 e 122) são comprados juntos por **77% dos clientes** —
@@ -178,6 +184,38 @@ Com base nos 2 anos de histórico, dois modelos foram aplicados:
 > **Nota de transparência:** Com apenas 2 anos de dados, estas projeções são orientações
 > direcionais. Para maior precisão, recomenda-se implementar Prophet quando houver
 > 3+ anos de histórico mensal.
+
+---
+
+## App ao Vivo (Streamlit)
+
+Toda a camada Gold é servida em um **web app interativo hospedado no Render**:
+
+### 🚀 [lh-nautical-analytics.onrender.com](https://lh-nautical-analytics.onrender.com)
+
+![Dashboard Executivo do app](docs/app_dashboard_executivo.jpg)
+
+*Dashboard Executivo: KPIs consolidados, evolução mensal de receita e receita por canal — direto da camada Gold.*
+
+O app tem **6 páginas**, uma para cada frente de análise:
+
+| Página | O que mostra |
+|--------|--------------|
+| 📊 Dashboard Executivo | KPIs consolidados, evolução de receita, canais |
+| 📦 Produtos | Margens por produto/categoria, alerta de prejuízo |
+| 👥 Clientes | Ranking, concentração (Pareto), geografia |
+| 📈 Temporal | Sazonalidade e padrões por dia/mês/trimestre |
+| 🔮 Previsão | Média Móvel vs Regressão Linear, com limitações explícitas |
+| 🤖 Recomendações | Populares, relacionados e pares de cesta (cross-sell) |
+
+> ⏱ Hospedado no plano gratuito do Render: o primeiro acesso pode levar **~30–60s** enquanto o servidor inicia.
+
+Para rodar o app localmente:
+
+```bash
+pip install -r streamlit_app/requirements.txt
+streamlit run streamlit_app/app.py
+```
 
 ---
 
@@ -243,14 +281,25 @@ lh_nautical_project/
 │   ├── inserts.sql                    ← Carga de dados de referência
 │   └── queries_analiticas.sql         ← 12 queries prontas para análise
 │
+├── streamlit_app/
+│   ├── app.py                         ← Entrada do web app (hospedado no Render)
+│   ├── pages/                         ← 6 páginas: executivo, produtos, clientes,
+│   │                                     temporal, previsão, recomendações
+│   ├── src/                           ← Loaders, gráficos, filtros e forecasting do app
+│   └── requirements.txt               ← Dependências específicas do app
+│
 ├── docs/
 │   ├── Imagem_01.jpg                  ← Diagrama da arquitetura do projeto
-│   └── Imagem_02.png                  ← Pipeline detalhado do dado bruto à entrega
+│   ├── Imagem_02.png                  ← Pipeline detalhado do dado bruto à entrega
+│   ├── app_home.jpg                   ← Screenshot: home do app ao vivo
+│   └── app_dashboard_executivo.jpg    ← Screenshot: dashboard executivo do app
 │
 ├── dashboards/
 │   └── README_POWERBI.md              ← Guia de integração Power BI + medidas DAX
 │
 ├── main.py                            ← Ponto de entrada do pipeline completo
+├── render.yaml                        ← Deploy do app no Render (IaC)
+├── runtime.txt                        ← Versão do Python para o deploy
 ├── requirements.txt                   ← Dependências Python
 └── README.md                          ← Este arquivo
 ```
@@ -319,4 +368,4 @@ Longo prazo (6-12 meses):
 Projeto desenvolvido como parte do desafio de modernização analítica da **LH Nautical**.
 
 > *"Dados organizados são o alicerce de qualquer decisão inteligente."*
-> — Jair Pereira da Silva Júnior, Data Analyst | Indicium
+> — Jair Pereira da Silva Júnior, Data Analyst
